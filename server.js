@@ -8,23 +8,32 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-/*connect to database
+/*app.get('/', (req, res) => {
+  res.json({
+    message: 'Hello World'
+  });
+}); */
+
+//connect to database
 const db = mysql.createConnection (
   {
-    host: 'local host',
+    host: "localhost",
     //your MySQL username,
-    user: 'root',
+    user: "root",
     //your MYQL password
-    passowrd: '',
-    database: 'election'
+    //password: "Sequel2021",
+    database: "election"
   },
-  console.log('connected to the election database')
-); */
+);
 
+db.connect(function(err){
+  if (err) throw err;
+  console.log("hello")
+})
 // Default response for any other request (Not Found)
 app.use((req, res) => {
   res.status(404).end();
-});
+}); 
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
